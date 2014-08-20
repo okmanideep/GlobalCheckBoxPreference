@@ -3,6 +3,12 @@ GlobalCheckBoxPreference
 
 Android's checkbox preference that is customisable and can be used any where like a normal view
 
+Normal State
+![GlobalCheckBoxPreference#Unchecked](https://un7o1q.by3301.livefilestore.com/y2pxmvKMYH7kpq6Jpa8fvr98Cmbjf21yPCVNyQPLsZ0G16rZ3Sh3RTOfT_GG95PgzbcHOlv47Q2vLJ_yWeJDXon9-1yWCfe8YvmkV5lbVKpmJk/Screenshot_2014-08-21-02-40-47_1.jpg?psid=1 "GlobalCheckBoxPreference_Unchecked")
+
+Pressed State
+![GlobalCheckBoxPreference#Pressed](https://pcozwa.by3301.livefilestore.com/y2pK9-jvIln_lHP1DQ7F40uFPPrTylg2t3fkZd9w4eyXFibcH_ICUPMX4hyg4453v-KEztL-nBCv-nqQlJwWSwhWDDpOFtbAuJZ_XA8PMPi9mQ/Screenshot_2014-08-21-02-40-53_1.jpg?psid=1 "GlobalCheckBoxPreference_Pressed")
+
 ##Using GlobalCheckBoxPreference 
 
 ###Imports and code changes
