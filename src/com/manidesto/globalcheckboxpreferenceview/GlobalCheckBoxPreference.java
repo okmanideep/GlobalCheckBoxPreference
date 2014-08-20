@@ -1,4 +1,6 @@
-package com.manidesto.globalcheckboxprefdemo;
+package com.manidesto.globalcheckboxpreferenceview;
+
+import com.manidesto.globalcheckboxprefdemo.R;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -86,6 +88,68 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 		} finally {
 			a.recycle();
 		}
+	}
+
+	/**
+	 * Key is the unique string identifier used to store the preference
+	 * value(checkbox state) in shared preferences
+	 * 
+	 * @return key of the preference to be stored in shared preferences
+	 */
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	public String getSummaryOn() {
+		return summaryOn;
+	}
+
+	public void setSummaryOn(String summaryOn) {
+		this.summaryOn = summaryOn;
+	}
+
+	public String getSummaryOff() {
+		return summaryOff;
+	}
+
+	public void setSummaryOff(String summaryOff) {
+		this.summaryOff = summaryOff;
+	}
+
+	public boolean getDefaultValue() {
+		return defaultValue;
+	}
+
+	public void setDefaultValue(boolean defaultValue) {
+		this.defaultValue = defaultValue;
+	}
+
+	public boolean usesSharedPrefs() {
+		return useSharedPrefs;
+	}
+
+	public void setUseSharedPrefs(boolean useSharedPrefs) {
+		this.useSharedPrefs = useSharedPrefs;
 	}
 
 	/**
