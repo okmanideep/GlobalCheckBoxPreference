@@ -16,14 +16,14 @@
         android:text="@string/demo"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <com.manidesto.globalcheckboxprefdemo.GlobalCheckBoxPreference
+    <com.manidesto.globalcheckboxpreferenceview.GlobalCheckBoxPreference
         custom:name="@string/without_summary_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         custom:defaultValue="true"
         custom:useSharedPrefs="false" />
 
-    <com.manidesto.globalcheckboxprefdemo.GlobalCheckBoxPreference
+    <com.manidesto.globalcheckboxpreferenceview.GlobalCheckBoxPreference
         custom:name="@string/with_summary_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
         custom:summary="@string/with_summary_summary"
         custom:useSharedPrefs="false" />
 
-    <com.manidesto.globalcheckboxprefdemo.GlobalCheckBoxPreference
+    <com.manidesto.globalcheckboxpreferenceview.GlobalCheckBoxPreference
         custom:name="@string/with_summary_on_off_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
         custom:summaryOn="@string/with_summary_on_off_summary_on"
         custom:useSharedPrefs="false" />
 
-    <com.manidesto.globalcheckboxprefdemo.GlobalCheckBoxPreference
+    <com.manidesto.globalcheckboxpreferenceview.GlobalCheckBoxPreference
         custom:name="@string/use_shared_prefs_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
