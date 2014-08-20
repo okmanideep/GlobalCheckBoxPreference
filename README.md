@@ -53,6 +53,7 @@ Android's checkbox preference that is customisable and can be used any where lik
   ```xml
   xmlns:android="http://schemas.android.com/apk/res/android"
   ```
+  
   * use the view
   ```xml
   <PACKAGE_NAME.GlobalCheckBoxPreference
