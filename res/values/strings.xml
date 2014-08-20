@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GlobalCheckBoxPreferenceDemo</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="demo">Demo</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="without_summary_name">Without Summary</string>
+    
+    <string name="with_summary_name">With Summary</string>
+    <string name="with_summary_summary">Summary of the preference</string>
+    
+    <string name="with_summary_on_off_name">With Summary on-off</string>
+    <string name="with_summary_on_off_summary_on">Summary when the checkbox is checked</string>
+    <string name="with_summary_on_off_summary_off">Summary when the checkbox is unchecked</string>
+    
+    <string name="use_shared_prefs_name">App Setting</string>
+    <string name="use_shared_prefs_key">use_shared_prefs_key</string>
+    <string name="use_shared_prefs_summary">This checkbox retains state even if the app stops(Uses Shared Preferences)</string>
+
+</resources>

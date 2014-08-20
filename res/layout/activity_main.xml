@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.manidesto.globalcheckboxprefdemo"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.manidesto.globalcheckboxprefdemo.MainActivity" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/demo"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <com.manidesto.globalcheckboxprefdemo.GlobalCheckBoxPreference
+        custom:name="@string/without_summary_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:defaultValue="true"
+        custom:useSharedPrefs="false" />
+
+    <com.manidesto.globalcheckboxprefdemo.GlobalCheckBoxPreference
+        custom:name="@string/with_summary_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:defaultValue="true"
+        custom:summary="@string/with_summary_summary"
+        custom:useSharedPrefs="false" />
+
+    <com.manidesto.globalcheckboxprefdemo.GlobalCheckBoxPreference
+        custom:name="@string/with_summary_on_off_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:defaultValue="true"
+        custom:summaryOff="@string/with_summary_on_off_summary_off"
+        custom:summaryOn="@string/with_summary_on_off_summary_on"
+        custom:useSharedPrefs="false" />
+
+    <com.manidesto.globalcheckboxprefdemo.GlobalCheckBoxPreference
+        custom:name="@string/use_shared_prefs_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:defaultValue="true"
+        custom:key="@string/use_shared_prefs_key"
+        custom:summary="@string/use_shared_prefs_summary"
+        custom:useSharedPrefs="true" />
+
+    </LinearLayout>
