@@ -39,6 +39,7 @@ Pressed State
   to
   ```java
   import YOUR_APPLICATION_PACKAGE_NAME.R;
+  //YOUR_APPLICATION_PACKAGE_NAME is the one you write in AndroidManifest.xml
   ```
 ###Understanding attributes
 * **name** : Name of the setting or preference
