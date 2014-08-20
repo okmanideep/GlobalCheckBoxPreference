@@ -100,55 +100,151 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 		return key;
 	}
 
+	/**
+	 * Sets the key for the preference. Its used to save the preference
+	 * value(checkbox state) in shared preferences
+	 * 
+	 * @param key
+	 *            unique string identifier for the preference in shared
+	 *            preferences
+	 */
 	public void setKey(String key) {
 		this.key = key;
 	}
 
+	/**
+	 * Name thats written beside the chechbox. Typically the title of the
+	 * setting
+	 * 
+	 * @return name or title of the setting thats written beside the checkbox
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the name or title of the setting written beside the checkbox
+	 * 
+	 * @param name
+	 *            name or title of the setting thats written beside the checkbox
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Summary is the explanation behind the name of the setting
+	 * 
+	 * @return summary of the setting
+	 */
 	public String getSummary() {
 		return summary;
 	}
 
+	/**
+	 * Sets the summary of the setting, the explanation behind the name
+	 * 
+	 * @param summary
+	 *            summary of the setting
+	 */
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
 
+	/**
+	 * SummaryOn is the text behind the name of the setting displayed when the
+	 * checkbox is checked
+	 * 
+	 * @return Summary of the setting when the checkbox is checked
+	 */
 	public String getSummaryOn() {
 		return summaryOn;
 	}
 
+	/**
+	 * SummaryOn is the text behind the name of the setting displayed when the
+	 * checkbox is checked
+	 * 
+	 * @param summaryOn
+	 *            Summary of the setting when the checkbox is checked
+	 */
 	public void setSummaryOn(String summaryOn) {
 		this.summaryOn = summaryOn;
 	}
 
+	/**
+	 * SummaryOff is the text behind the name of the setting displayed when the
+	 * checkbox is unchecked
+	 * 
+	 * @return Summary of the setting when the checkbox is unchecked
+	 */
 	public String getSummaryOff() {
 		return summaryOff;
 	}
 
+	/**
+	 * SummaryOff is the text behind the name of the setting displayed when the
+	 * checkbox is unchecked
+	 * 
+	 * @param summaryOff
+	 *            Summary of the setting when the checkbox is unchecked
+	 */
 	public void setSummaryOff(String summaryOff) {
 		this.summaryOff = summaryOff;
 	}
 
+	/**
+	 * 
+	 * @return Default value of the checkbox(checked or unchecked). false if not
+	 *         mentioned in attributes.
+	 */
 	public boolean getDefaultValue() {
 		return defaultValue;
 	}
 
-	public void setDefaultValue(boolean defaultValue) {
-		this.defaultValue = defaultValue;
+	/**
+	 * Checks the checkbox if true or Unchecks the checkbox if false and stores
+	 * the value in the shared preferences
+	 * 
+	 * @param value
+	 *            state of the checkbox - checked = true, unchecked = false
+	 */
+	public void setChecked(boolean value) {
+		setBooleanInPrefs(value);
 	}
 
+	/**
+	 * SharedPreferences object that is used by this view to store the
+	 * preference value(state of the checkbox).
+	 * 
+	 * PreferenceManager.getDefaultSharedPreferences(Context context) returns
+	 * different SharedPreferences for contexts of different packages(not
+	 * Application Package). So use this function to get the SharedPreferences
+	 * used by this view
+	 * 
+	 * @return SharedPreferences used by this view to store the preference
+	 *         value(state of the checkbox)
+	 */
+	public SharedPreferences getSharedPreferences() {
+		return sharedPrefs;
+	}
+
+	/**
+	 * Whether this view is using shared preferences to store the checkbox value
+	 * to store the setting and restore the checkbox state when the app is
+	 * closed and reopened
+	 * 
+	 * @return true if the setting is stored in shared preferences, false otherwise
+	 */
 	public boolean usesSharedPrefs() {
 		return useSharedPrefs;
 	}
 
-	public void setUseSharedPrefs(boolean useSharedPrefs) {
+	/**
+	 * Whether to use shared preferences to store the checkbox state
+	 * @param useSharedPrefs true if the setting should be stored in shared preferences, false otherwise
+	 */
+	public void UseSharedPrefs(boolean useSharedPrefs) {
 		this.useSharedPrefs = useSharedPrefs;
 	}
 
