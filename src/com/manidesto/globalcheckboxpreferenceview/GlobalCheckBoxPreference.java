@@ -288,11 +288,14 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 	}
 
 	private void setSuitableSummary() {
+		summaryTextView.setVisibility(View.VISIBLE);
 		if (checkBox.isChecked()) {
-			if (summaryOn != null)
+			if (summaryOn != null){
 				summaryTextView.setText(summaryOn);
-			else if (summary != null)
+			}
+			else if (summary != null){
 				summaryTextView.setText(summary);
+			}
 			else
 				summaryTextView.setVisibility(View.GONE);
 		} else {
