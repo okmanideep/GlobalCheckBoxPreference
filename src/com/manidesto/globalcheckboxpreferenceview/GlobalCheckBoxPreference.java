@@ -1,7 +1,5 @@
 package com.manidesto.globalcheckboxpreferenceview;
 
-import com.manidesto.globalcheckboxprefdemo.R;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
@@ -10,11 +8,14 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.manidesto.globalcheckboxprefdemo.R;
 
 /**
  * A CheckBox setting view which you can use anywhere(not just preference
@@ -24,6 +25,8 @@ import android.widget.TextView;
  * 
  */
 public class GlobalCheckBoxPreference extends RelativeLayout {
+	private static final String TAG = "GlobalCheckBoxPreference";
+	
 	private RelativeLayout container;
 	private CheckBox checkBox;
 	private TextView nameTextView;
@@ -311,17 +314,21 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 		setSuitableSummary();
 	}
 
-	private boolean getBooleanFromPrefs(boolean defaultValue) {
-		if (useSharedPrefs)
+	private boolean getBooleanFromPrefs(boolean defaultValue){
+		if (useSharedPrefs){
+			if(key == null) Log.e(TAG, "key attribute not provided to store in sharedPrefs");
 			return sharedPrefs.getBoolean(key, defaultValue);
+		}
 		else
 			return checkBox.isChecked();
 	}
 
 	private void setBooleanInPrefs(boolean value) {
 		checkBox.setChecked(value);
-		if (useSharedPrefs)
+		if (useSharedPrefs){
+			if(key == null) Log.e(TAG, "key attribute not provided to store in sharedPrefs");
 			sharedPrefs.edit().putBoolean(key, value).commit();
+		}
 	}
 
 	private void setSuitableSummary() {
