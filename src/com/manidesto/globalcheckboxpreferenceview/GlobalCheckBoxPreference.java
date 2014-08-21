@@ -230,11 +230,27 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 	}
 
 	/**
+	 * PreferenceManager.getDefaultSharedPreferences(Context context) returns
+	 * different SharedPreferences for contexts of different packages(not
+	 * Application Package). 
+	 * 
+	 * If you are already using shared preferences in some other Context or
+	 * using a file name, set this view to use the same shared preferences to
+	 * access this preference value(checkbox state) through that sharedPrefs.
+	 * 
+	 * @param sharedPrefs SharedPreferences already been used by you
+	 */
+	public void setSharedPreferences(SharedPreferences sharedPrefs) {
+		this.sharedPrefs = sharedPrefs;
+	}
+
+	/**
 	 * Whether this view is using shared preferences to store the checkbox value
 	 * to store the setting and restore the checkbox state when the app is
 	 * closed and reopened
 	 * 
-	 * @return true if the setting is stored in shared preferences, false otherwise
+	 * @return true if the setting is stored in shared preferences, false
+	 *         otherwise
 	 */
 	public boolean usesSharedPrefs() {
 		return useSharedPrefs;
@@ -242,7 +258,10 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 
 	/**
 	 * Whether to use shared preferences to store the checkbox state
-	 * @param useSharedPrefs true if the setting should be stored in shared preferences, false otherwise
+	 * 
+	 * @param useSharedPrefs
+	 *            true if the setting should be stored in shared preferences,
+	 *            false otherwise
 	 */
 	public void UseSharedPrefs(boolean useSharedPrefs) {
 		this.useSharedPrefs = useSharedPrefs;
@@ -290,13 +309,11 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 	private void setSuitableSummary() {
 		summaryTextView.setVisibility(View.VISIBLE);
 		if (checkBox.isChecked()) {
-			if (summaryOn != null){
+			if (summaryOn != null) {
 				summaryTextView.setText(summaryOn);
-			}
-			else if (summary != null){
+			} else if (summary != null) {
 				summaryTextView.setText(summary);
-			}
-			else
+			} else
 				summaryTextView.setVisibility(View.GONE);
 		} else {
 			if (summaryOff != null)
