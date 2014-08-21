@@ -36,6 +36,16 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 	private String summaryOff;
 	private boolean defaultValue = false;
 	private boolean useSharedPrefs = true;
+	private OnCheckBoxStateChangeListener listener;
+	
+	/**
+	 * Listner Interface to listen when checkbox state changes
+	 * @author manidesto
+	 *
+	 */
+	public interface OnCheckBoxStateChangeListener{
+		public void OnCheckBoxStateChanged(boolean isChecked);
+	}
 
 	public GlobalCheckBoxPreference(Context context) {
 		super(context);
@@ -88,6 +98,14 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 		} finally {
 			a.recycle();
 		}
+	}
+	
+	/**
+	 * use this function to register to listen for checkbox state change
+	 * @param listener
+	 */
+	public void setOnCheckBoxStateChangeListener(OnCheckBoxStateChangeListener listener){
+		this.listener = listener;
 	}
 
 	/**
@@ -329,6 +347,7 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 		boolean currentPref = getBooleanFromPrefs(defaultValue);
 		setBooleanInPrefs(!currentPref);
 		updateViewElements();
+		if(listener != null) listener.OnCheckBoxStateChanged(!currentPref);
 	}
 
 	/**
