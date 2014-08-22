@@ -38,7 +38,6 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 	private String summaryOn;
 	private String summaryOff;
 	private boolean defaultValue = false;
-	private boolean useSharedPrefs = true;
 	private OnCheckBoxStateChangeListener listener;
 	
 	/**
@@ -90,8 +89,6 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 			key = a.getString(R.styleable.GlobalCheckBoxPreference_key);
 			defaultValue = a.getBoolean(
 					R.styleable.GlobalCheckBoxPreference_defaultValue, false);
-			useSharedPrefs = a.getBoolean(
-					R.styleable.GlobalCheckBoxPreference_useSharedPrefs, true);
 			name = a.getString(R.styleable.GlobalCheckBoxPreference_name);
 			summary = a.getString(R.styleable.GlobalCheckBoxPreference_summary);
 			summaryOn = a
@@ -266,29 +263,6 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 	}
 
 	/**
-	 * Whether this view is using shared preferences to store the checkbox value
-	 * to store the setting and restore the checkbox state when the app is
-	 * closed and reopened
-	 * 
-	 * @return true if the setting is stored in shared preferences, false
-	 *         otherwise
-	 */
-	public boolean usesSharedPrefs() {
-		return useSharedPrefs;
-	}
-
-	/**
-	 * Whether to use shared preferences to store the checkbox state
-	 * 
-	 * @param useSharedPrefs
-	 *            true if the setting should be stored in shared preferences,
-	 *            false otherwise
-	 */
-	public void UseSharedPrefs(boolean useSharedPrefs) {
-		this.useSharedPrefs = useSharedPrefs;
-	}
-
-	/**
 	 * A public function that sets the typeface provided to both title text view
 	 * and summary text view
 	 * 
@@ -315,8 +289,7 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 	}
 
 	private boolean getBooleanFromPrefs(boolean defaultValue){
-		if (useSharedPrefs){
-			if(key == null) Log.e(TAG, "key attribute not provided to store in sharedPrefs");
+		if (key != null){
 			return sharedPrefs.getBoolean(key, defaultValue);
 		}
 		else
@@ -325,8 +298,7 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 
 	private void setBooleanInPrefs(boolean value) {
 		checkBox.setChecked(value);
-		if (useSharedPrefs){
-			if(key == null) Log.e(TAG, "key attribute not provided to store in sharedPrefs");
+		if (key != null){
 			sharedPrefs.edit().putBoolean(key, value).commit();
 		}
 	}
