@@ -15,6 +15,9 @@
     <string name="with_summary_on_off_summary_on">Summary when the checkbox is checked</string>
     <string name="with_summary_on_off_summary_off">Summary when the checkbox is unchecked</string>
     
+    <string name="with_icon_name">With Icon</string>
+    <string name="with_icon_summary">Summary for icon preference</string>
+    
     <string name="use_shared_prefs_name">App Setting</string>
     <string name="use_shared_prefs_key">use_shared_prefs_key</string>
     <string name="use_shared_prefs_summary">This checkbox retains state even if the app stops(Uses Shared Preferences)</string>

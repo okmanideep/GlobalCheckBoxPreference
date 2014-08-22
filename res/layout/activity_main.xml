@@ -49,4 +49,13 @@
         custom:summary="@string/use_shared_prefs_summary"
         custom:useSharedPrefs="true" />
 
+    <com.manidesto.globalcheckboxpreferenceview.GlobalCheckBoxPreference
+        custom:name="@string/with_icon_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:defaultValue="true"
+        custom:summary="@string/with_icon_summary"
+        custom:iconSrc="@drawable/photo_library"
+        custom:useSharedPrefs="false" />
+
     </LinearLayout>
