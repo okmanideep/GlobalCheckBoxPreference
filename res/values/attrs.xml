@@ -8,5 +8,7 @@
         <attr name="defaultValue" format="boolean" />
         <attr name="useSharedPrefs" format="boolean" />
         <attr name="key" format="string" />
+        <attr name="iconSrc" format="integer" />
+        
     </declare-styleable>
 </resources>

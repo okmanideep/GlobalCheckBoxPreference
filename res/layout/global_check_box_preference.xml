@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/preference_container"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:id="@+id/preference_container" >
+    android:padding="10dp" >
+
+    <ImageView
+        android:id="@+id/preference_image"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:contentDescription=""
+        android:visibility="gone" />
 
     <CheckBox
         android:id="@+id/preference_check_box"
@@ -12,27 +22,28 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true" />
 
-    <RelativeLayout 
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/preference_check_box">
-        <TextView 
+        android:layout_toLeftOf="@id/preference_check_box"
+        android:layout_toRightOf="@id/preference_image" >
+
+        <TextView
             android:id="@+id/preference_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:textSize="18sp"/>
-        <TextView 
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/preference_summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_below="@id/preference_name"/>
+            android:layout_below="@id/preference_name"
+            android:textSize="13sp" />
     </RelativeLayout>
-    
 
 </RelativeLayout>

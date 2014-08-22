@@ -6,12 +6,13 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -26,26 +27,29 @@ import com.manidesto.globalcheckboxprefdemo.R;
  */
 public class GlobalCheckBoxPreference extends RelativeLayout {
 	private static final String TAG = "GlobalCheckBoxPreference";
-	
+
 	private RelativeLayout container;
 	private CheckBox checkBox;
 	private TextView nameTextView;
 	private TextView summaryTextView;
+	private ImageView iconImageView;
 	private SharedPreferences sharedPrefs;
 	private String key;
 	private String name;
 	private String summary;
 	private String summaryOn;
 	private String summaryOff;
+	private Drawable icon;
 	private boolean defaultValue = false;
 	private OnCheckBoxStateChangeListener listener;
-	
+
 	/**
 	 * Listner Interface to listen when checkbox state changes
+	 * 
 	 * @author manidesto
-	 *
+	 * 
 	 */
-	public interface OnCheckBoxStateChangeListener{
+	public interface OnCheckBoxStateChangeListener {
 		public void OnCheckBoxStateChanged(boolean isChecked);
 	}
 
@@ -78,6 +82,7 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 
 		nameTextView = (TextView) root.findViewById(R.id.preference_name);
 		summaryTextView = (TextView) root.findViewById(R.id.preference_summary);
+		iconImageView = (ImageView) root.findViewById(R.id.preference_image);
 		updateViewElements();
 	}
 
@@ -95,16 +100,19 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 					.getString(R.styleable.GlobalCheckBoxPreference_summaryOn);
 			summaryOff = a
 					.getString(R.styleable.GlobalCheckBoxPreference_summaryOff);
+			icon = a.getDrawable(R.styleable.GlobalCheckBoxPreference_iconSrc);
 		} finally {
 			a.recycle();
 		}
 	}
-	
+
 	/**
 	 * use this function to register to listen for checkbox state change
+	 * 
 	 * @param listener
 	 */
-	public void setOnCheckBoxStateChangeListener(OnCheckBoxStateChangeListener listener){
+	public void setOnCheckBoxStateChangeListener(
+			OnCheckBoxStateChangeListener listener) {
 		this.listener = listener;
 	}
 
@@ -250,13 +258,14 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 	/**
 	 * PreferenceManager.getDefaultSharedPreferences(Context context) returns
 	 * different SharedPreferences for contexts of different packages(not
-	 * Application Package). 
+	 * Application Package).
 	 * 
 	 * If you are already using shared preferences in some other Context or
 	 * using a file name, set this view to use the same shared preferences to
 	 * access this preference value(checkbox state) through that sharedPrefs.
 	 * 
-	 * @param sharedPrefs SharedPreferences already been used by you
+	 * @param sharedPrefs
+	 *            SharedPreferences already been used by you
 	 */
 	public void setSharedPreferences(SharedPreferences sharedPrefs) {
 		this.sharedPrefs = sharedPrefs;
@@ -280,25 +289,35 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 	 * of the views you added when the settings change. Don't forget to call
 	 * super.updateViewElements() when you do so
 	 */
+	/*
+	 * @author: Praveen
+	 * setBackground is alternative setBackgroundDrawable but, setBackground is
+	 * added in API Level 16 so, using the deprecated function.
+	 */
+	@SuppressWarnings("deprecation")
 	protected void updateViewElements() {
 		checkBox.setChecked(getBooleanFromPrefs(defaultValue));
 		setBooleanInPrefs(checkBox.isChecked());
 
 		nameTextView.setText(name);
 		setSuitableSummary();
+
+		if (icon != null) {
+			iconImageView.setVisibility(ImageView.VISIBLE);
+			iconImageView.setBackgroundDrawable(icon);
+		}
 	}
 
-	private boolean getBooleanFromPrefs(boolean defaultValue){
-		if (key != null){
+	private boolean getBooleanFromPrefs(boolean defaultValue) {
+		if (key != null) {
 			return sharedPrefs.getBoolean(key, defaultValue);
-		}
-		else
+		} else
 			return checkBox.isChecked();
 	}
 
 	private void setBooleanInPrefs(boolean value) {
 		checkBox.setChecked(value);
-		if (key != null){
+		if (key != null) {
 			sharedPrefs.edit().putBoolean(key, value).commit();
 		}
 	}
@@ -326,7 +345,8 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 		boolean currentPref = getBooleanFromPrefs(defaultValue);
 		setBooleanInPrefs(!currentPref);
 		updateViewElements();
-		if(listener != null) listener.OnCheckBoxStateChanged(!currentPref);
+		if (listener != null)
+			listener.OnCheckBoxStateChanged(!currentPref);
 	}
 
 	/**
