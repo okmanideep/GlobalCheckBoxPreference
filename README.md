@@ -47,8 +47,7 @@ Pressed State
 * **summaryOn** : Summary of the setting when the checkbox is checked
 * **summaryOff** : Summary of the setting when the checkbox is unchecked
 * **defaultValue** : Default state of the chechbox(checked or unchecked)
-* **key** : Unique key of the preference to store the checkbox state when *useSharedPrefs* is true
-* **useSharedPrefs** : Use shared preferences to store the checkbox state. When true and *key* is provided, the state of the checkbox is retained even if the app is closed and reopened
+* **key** : Unique key of the preference to store the checkbox state and restore it when the app is restarted. When this key is not set(either through xml or java) the state of the checkbox or the preference value is not stored in the SharedPreferences and therefore not restored when the app is closed and reopened. 
 
 ###Using the view
 * In the layout file that you want to add the GlobalChechBoxPreference view
