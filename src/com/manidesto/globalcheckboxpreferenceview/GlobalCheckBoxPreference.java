@@ -12,9 +12,11 @@ import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
+import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -34,12 +36,14 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 	private CheckBox checkBox;
 	private TextView nameTextView;
 	private TextView summaryTextView;
+	private ImageView iconImageView;
 	private SharedPreferences sharedPrefs;
 	private String key;
 	private String name;
 	private String summary;
 	private String summaryOn;
 	private String summaryOff;
+	private Drawable icon;
 	private boolean defaultValue = false;
 	private OnCheckBoxStateChangeListener listener;
 
@@ -82,6 +86,7 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 
 		nameTextView = (TextView) root.findViewById(R.id.preference_name);
 		summaryTextView = (TextView) root.findViewById(R.id.preference_summary);
+		iconImageView = (ImageView) root.findViewById(R.id.preference_image);
 		updateViewElements();
 	}
 
@@ -99,6 +104,7 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 					.getString(R.styleable.GlobalCheckBoxPreference_summaryOn);
 			summaryOff = a
 					.getString(R.styleable.GlobalCheckBoxPreference_summaryOff);
+			icon = a.getDrawable(R.styleable.GlobalCheckBoxPreference_iconSrc);
 		} finally {
 			a.recycle();
 		}
@@ -286,6 +292,8 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 	 * the change in settings. Override this function to change the properties
 	 * of the views you added when the settings change. Don't forget to call
 	 * super.updateViewElements() when you do so
+	 * 
+	 * @author manidesto, praveen(praveendath92 on github)
 	 */
 	protected void updateViewElements() {
 		checkBox.setChecked(getBooleanFromPrefs(defaultValue));
@@ -293,6 +301,11 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 
 		nameTextView.setText(name);
 		setSuitableSummary();
+
+		if (icon != null) {
+			iconImageView.setVisibility(ImageView.VISIBLE);
+			iconImageView.setImageDrawable(icon);
+		}
 	}
 
 	private boolean getBooleanFromPrefs(boolean defaultValue) {
