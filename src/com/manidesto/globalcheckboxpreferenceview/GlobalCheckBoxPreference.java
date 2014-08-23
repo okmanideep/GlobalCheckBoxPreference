@@ -6,9 +6,12 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
@@ -26,7 +29,7 @@ import com.manidesto.globalcheckboxprefdemo.R;
  */
 public class GlobalCheckBoxPreference extends RelativeLayout {
 	private static final String TAG = "GlobalCheckBoxPreference";
-	
+
 	private RelativeLayout container;
 	private CheckBox checkBox;
 	private TextView nameTextView;
@@ -39,13 +42,14 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 	private String summaryOff;
 	private boolean defaultValue = false;
 	private OnCheckBoxStateChangeListener listener;
-	
+
 	/**
 	 * Listner Interface to listen when checkbox state changes
+	 * 
 	 * @author manidesto
-	 *
+	 * 
 	 */
-	public interface OnCheckBoxStateChangeListener{
+	public interface OnCheckBoxStateChangeListener {
 		public void OnCheckBoxStateChanged(boolean isChecked);
 	}
 
@@ -99,12 +103,14 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 			a.recycle();
 		}
 	}
-	
+
 	/**
 	 * use this function to register to listen for checkbox state change
+	 * 
 	 * @param listener
 	 */
-	public void setOnCheckBoxStateChangeListener(OnCheckBoxStateChangeListener listener){
+	public void setOnCheckBoxStateChangeListener(
+			OnCheckBoxStateChangeListener listener) {
 		this.listener = listener;
 	}
 
@@ -250,13 +256,14 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 	/**
 	 * PreferenceManager.getDefaultSharedPreferences(Context context) returns
 	 * different SharedPreferences for contexts of different packages(not
-	 * Application Package). 
+	 * Application Package).
 	 * 
 	 * If you are already using shared preferences in some other Context or
 	 * using a file name, set this view to use the same shared preferences to
 	 * access this preference value(checkbox state) through that sharedPrefs.
 	 * 
-	 * @param sharedPrefs SharedPreferences already been used by you
+	 * @param sharedPrefs
+	 *            SharedPreferences already been used by you
 	 */
 	public void setSharedPreferences(SharedPreferences sharedPrefs) {
 		this.sharedPrefs = sharedPrefs;
@@ -288,17 +295,16 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 		setSuitableSummary();
 	}
 
-	private boolean getBooleanFromPrefs(boolean defaultValue){
-		if (key != null){
+	private boolean getBooleanFromPrefs(boolean defaultValue) {
+		if (key != null) {
 			return sharedPrefs.getBoolean(key, defaultValue);
-		}
-		else
+		} else
 			return checkBox.isChecked();
 	}
 
 	private void setBooleanInPrefs(boolean value) {
 		checkBox.setChecked(value);
-		if (key != null){
+		if (key != null) {
 			sharedPrefs.edit().putBoolean(key, value).commit();
 		}
 	}
@@ -326,7 +332,8 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 		boolean currentPref = getBooleanFromPrefs(defaultValue);
 		setBooleanInPrefs(!currentPref);
 		updateViewElements();
-		if(listener != null) listener.OnCheckBoxStateChanged(!currentPref);
+		if (listener != null)
+			listener.OnCheckBoxStateChanged(!currentPref);
 	}
 
 	/**
@@ -399,6 +406,55 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 		return summaryTextView;
 	}
 
+	/**
+	 * Saving the state of the checkbox when the activity is destroyed by the
+	 * system(when orientation changes). This helps us to restore the checkbox
+	 * state when the activity is restored by the system.
+	 * 
+	 * Note that this only gets called when the view is assigned a unique id in
+	 * the layout
+	 */
+	@Override
+	public Parcelable onSaveInstanceState() {
+		Bundle bundle = new Bundle();
+		bundle.putParcelable("instanceState", super.onSaveInstanceState());
+		bundle.putBoolean("checkboxState", this.isChecked());
+		return bundle;
+	}
+
+	/**
+	 * Restoring the checkbox state when the activity was restarted by the
+	 * system
+	 * 
+	 * This only gets called when the view is assigned a unique id in the layout
+	 */
+	@Override
+	public void onRestoreInstanceState(Parcelable state) {
+
+		if (state instanceof Bundle) {
+			Bundle bundle = (Bundle) state;
+			boolean checkState = bundle.getBoolean("checkboxState");
+			this.setChecked(checkState);
+			state = bundle.getParcelable("instanceState");
+		}
+		super.onRestoreInstanceState(state);
+	}
+
+	@Override
+	protected void dispatchSaveInstanceState(SparseArray<Parcelable> container) {
+		// As we save our own instance state, ensure our children don't save and
+		// restore their state as well.
+		super.dispatchFreezeSelfOnly(container);
+	}
+
+	@Override
+	protected void dispatchRestoreInstanceState(
+			SparseArray<Parcelable> container) {
+		// As we save our own instance state, ensure our children don't save and
+		// restore their state as well.
+		super.dispatchThawSelfOnly(container);
+	}
+
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
 		return true;
@@ -446,4 +502,8 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 		return super.performClick();
 	}
 
+	private void printLog(String what) {
+		// boolean debug = BuildConfig.DEBUG;
+		Log.d(TAG, what);
+	}
 }
