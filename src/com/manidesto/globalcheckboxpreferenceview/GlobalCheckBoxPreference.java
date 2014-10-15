@@ -45,6 +45,7 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 	private String summaryOff;
 	private Drawable icon;
 	private boolean defaultValue = false;
+	private String prefString;
 	private OnCheckBoxStateChangeListener listener;
 
 	/**
@@ -78,7 +79,10 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 	private void init(Context context) {
 		View root = View.inflate(context, R.layout.global_check_box_preference,
 				this);
-		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+		if(prefString != null)
+			sharedPrefs = context.getSharedPreferences(prefString, Context.MODE_PRIVATE);
+		else
+			sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
 
 		container = (RelativeLayout) root
 				.findViewById(R.id.preference_container);
@@ -105,6 +109,7 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 			summaryOff = a
 					.getString(R.styleable.GlobalCheckBoxPreference_summaryOff);
 			icon = a.getDrawable(R.styleable.GlobalCheckBoxPreference_iconSrc);
+			prefString = a.getString(R.styleable.GlobalCheckBoxPreference_prefs);
 		} finally {
 			a.recycle();
 		}
@@ -273,6 +278,7 @@ public class GlobalCheckBoxPreference extends RelativeLayout {
 	 */
 	public void setSharedPreferences(SharedPreferences sharedPrefs) {
 		this.sharedPrefs = sharedPrefs;
+		updateViewElements();
 	}
 
 	/**
