@@ -29,6 +29,7 @@ Pressed State
           <attr name="useSharedPrefs" format="boolean" />
           <attr name="key" format="string" />
           <attr name="iconSrc" format="integer" />
+          <attr name="prefs" format="string" />
       </declare-styleable>
   </resources>
   ```
@@ -50,6 +51,7 @@ Pressed State
 * **defaultValue** : Default state of the chechbox(checked or unchecked)
 * **key** : Unique key of the preference to store the checkbox state and restore it when the app is restarted. When this key is not set(either through xml or java) the state of the checkbox or the preference value is not stored in the SharedPreferences and therefore not restored when the app is closed and reopened. 
 * **iconSrc** : Provide a drawable resource Id to set an icon on the left of the title
+* **prefs** : Preference String to get the SharedPreferences from the string. If not given ```PreferenceManager.getDefaultSharedPreferences()``` is used. If given ```context.getSharedPreferences(prefs, Context.MODE_PRIVATE)``` is used.
 
 ###Using the view
 * In the layout file that you want to add the GlobalChechBoxPreference view
